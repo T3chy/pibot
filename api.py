@@ -7,10 +7,31 @@ pwm = Adafruit_PCA9685.PCA9685()
 servo_min = 150  # Min pulse length out of 4096
 servo_max = 600  # Max pulse length out of 4096
 pwm.set_pwm_freq(60)
-def forward():
+def turn(degrees):
+    degrees = float(degrees)
+    if abs(degrees) == degrees:
+        dir = "right"
+    else:
+        dir = "left"
+        degrees = abs(degrees)
+    if degrees > 90:
+        print("input over 90 degrees, returning 90 degrees")
+        degrees = 90
+    center = (servo_max - servo_min) / 2 + servo_min
+    rightang = (servo_max - servo_min) / 2
+    if degrees == 0:
+        return center
+    if dir == "right":
+        return (degrees / 90) * rightang + center
+    else:
+        return (degrees / 90) * rightang - center
+
+def forward(turndeg=0):
+        pwm.set_pwm(2,0,turn(turndeg))
         pwm.set_pwm(0,0,servo_min)
         pwm.set_pwm(1,0,servo_max)
-def backward():
+def backward(turndeg=0):
+        pwm.set_pwm(2,0,turn(turndeg))
         pwm.set_pwm(0,0,servo_max)
         pwm.set_pwm(1,0,servo_min)
 def stop():
@@ -23,10 +44,10 @@ def move():
     if request.method == "PUT":
         dir = request.form["dir"]
         if dir == "forward":
-            forward()
+            forward(turndeg=request.form["turndeg"])
             return("going forward")
-        if dir == "backward":
-            backward()
+        elif dir == "backward":
+            backward(turndeg=request.form["turndeg"])
             return("going backward")
         else:
             stop()
