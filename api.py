@@ -1,5 +1,6 @@
 import time
 import flask
+from flask import request
 import Adafruit_PCA9685
 pwm = Adafruit_PCA9685.PCA9685()
 # Configure min and max servo pulse lengths
