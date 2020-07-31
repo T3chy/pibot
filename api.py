@@ -18,7 +18,7 @@ def stop():
 app = flask.Flask(__name__)
 
 @app.route('/', methods=['GET','PUT'])
-def home(request):
+def home():
     if request.method == "PUT":
         if dir == "forward":
             forward()
