@@ -21,6 +21,7 @@ app = flask.Flask(__name__)
 @app.route('/move', methods=['GET','PUT'])
 def move():
     if request.method == "PUT":
+        dir = request.data["dir"]
         if dir == "forward":
             forward()
             return("going forward")
