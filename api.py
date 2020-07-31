@@ -32,4 +32,4 @@ def home(request):
     else:
         return("still alive")
     
-app.run()
+app.run(host='0.0.0.0')
