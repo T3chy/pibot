@@ -25,8 +25,8 @@ def turn(degrees):
     if dir == "right":
         return int((degrees / 90) * rightang + center)
     else:
-        print(int((degrees / 90) * rightang - center))
-        return int((degrees / 90) * rightang - center)
+        print(int((degrees / 90) * rightang))
+        return int((degrees / 90) * rightang)
 
 def forward(turndeg=0):
         pwm.set_pwm(2,0,turn(turndeg))
