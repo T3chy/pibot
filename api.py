@@ -47,8 +47,7 @@ def turn(degrees,isstop=False):
         print(int((degrees / 90) * rightang))
         return int(center - ((degrees / 90) * rightang))
 def lightsoff():
-    for i in num_pixels:
-        pixels.fill((0,0,0))
+    pixels.fill((0,0,0))
     pixels.show()
 def turnsignal(dir):
     if dir == "left":
