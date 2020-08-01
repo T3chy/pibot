@@ -19,6 +19,7 @@ def turn(degrees):
         degrees = 90
     center = (servo_max - servo_min) / 2 + servo_min
     rightang = (servo_max - servo_min) / 2
+    print("turning " + str(degrees) + " degrees to the " + dir)
     if degrees == 0:
         return int(center)
     if dir == "right":
