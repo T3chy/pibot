@@ -34,8 +34,10 @@ def backward(turndeg=0):
         pwm.set_pwm(2,0,turn(turndeg))
         pwm.set_pwm(0,0,servo_max)
         pwm.set_pwm(1,0,servo_min)
-def stop():
-        pwm.set_all_pwm(0,1)
+def stop(turndeg=0):
+        pwm.set_pwm(2,0,turn(turndeg))
+        pwm.set_pwm(0,1,0)
+        pwm.set_pwm(1,1,0)
 
 app = flask.Flask(__name__)
 
@@ -50,7 +52,7 @@ def move():
             backward(turndeg=request.form["turndeg"])
             return("going backward")
         else:
-            stop()
+            stop(turndeg=request.form["turndeg"])
             return("stopping")
     else:
         return("still alive")
