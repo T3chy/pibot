@@ -21,7 +21,9 @@ pixels.fill((0,0,0))
 pixels.show()
 def turn(degrees,isstop=False):
     degrees = float(degrees)
-    if abs(degrees) == degrees:
+    if degrees == 0:
+        dir = "no"
+    elif abs(degrees) == degrees:
         dir = "right"
     else:
         dir = "left"
@@ -50,7 +52,10 @@ def lightsoff():
     pixels.fill((0,0,0))
     pixels.show()
 def turnsignal(dir):
-    if dir == "left":
+    if dir == "no":
+        pixels.fill((0,0,0))
+        pixels.show()
+    elif dir == "left":
         dir = [0]
     elif dir == "right":
         dir = [7]
