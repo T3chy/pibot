@@ -59,4 +59,7 @@ def move():
     else:
         return("still alive")
     
-app.run(host='0.0.0.0')
+try :
+    app.run(host='0.0.0.0')
+finally:
+    pwm.set_all_pwm(1,0)
