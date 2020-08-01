@@ -20,11 +20,11 @@ def turn(degrees):
     center = (servo_max - servo_min) / 2 + servo_min
     rightang = (servo_max - servo_min) / 2
     if degrees == 0:
-        return center
+        return int(center)
     if dir == "right":
-        return (degrees / 90) * rightang + center
+        return int((degrees / 90) * rightang + center)
     else:
-        return (degrees / 90) * rightang - center
+        return int((degrees / 90) * rightang - center)
 
 def forward(turndeg=0):
         pwm.set_pwm(2,0,turn(turndeg))
