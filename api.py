@@ -25,6 +25,7 @@ def turn(degrees):
     if dir == "right":
         return int((degrees / 90) * rightang + center)
     else:
+        print(int((degrees / 90) * rightang - center))
         return int((degrees / 90) * rightang - center)
 
 def forward(turndeg=0):
