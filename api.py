@@ -6,7 +6,7 @@ import time
 import board
 import neopixel
 pixel_pin = board.D18
-num_pixels = 8
+num_pixels = 16
 ORDER = neopixel.GRB
  
 pixels = neopixel.NeoPixel(
@@ -19,7 +19,7 @@ pwm.set_pwm_freq(60)
 signal = ""
 dir = ""
 deg = ""
-pixels.fill((0,0,0))
+pixels.fill((255,0,0))
 pixels.show()
 def turn(degrees,isstop=False):
     degrees = float(degrees)
@@ -109,8 +109,9 @@ def move():
         deg = int(deg) if deg != "" else 0
         return "right" if deg > 0 else "left"
         #return{"alive":'yes', "dir":dir, 'turndeg':deg}
-    
+import subprocess
 try:
+    subprocess.Popen(["sudo", "python3", 'turnsignal.py'])
     dir = ""
     deg = ""
     app.run(host='0.0.0.0')
