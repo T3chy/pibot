@@ -63,15 +63,15 @@ def turnsignal(dir):
         dir = [3,4]
     else:
         dir = list(range(num_pixels))
-    while True:
-        for i in dir:
-            pixels[i] = (255, 0, 0)
-        pixels.show()
-        time.sleep(.5)
-        for i in dir:    
-            pixels[i]= (0,0,0)
-        pixels.show()
-        time.sleep(.5)
+#    while True:
+#        for i in dir:
+#            pixels[i] = (255, 0, 0)
+#        pixels.show()
+#        time.sleep(.5)
+#        for i in dir:    
+#            pixels[i]= (0,0,0)
+#        pixels.show()
+#        time.sleep(.5)
 def forward(turndeg=0):
         pwm.set_pwm(2,0,turn(turndeg))
         pwm.set_pwm(0,0,servo_min)
@@ -91,17 +91,18 @@ app = flask.Flask(__name__)
 def move():
     if request.method == "PUT":
         dir = request.form["dir"]
+        deg = request.form['turndeg']
         if dir == "forward":
-            forward(turndeg=request.form["turndeg"])
+            forward(turndeg=deg)
             return("going forward")
         elif dir == "backward":
-            backward(turndeg=request.form["turndeg"])
+            backward(turndeg=deg)
             return("going backward")
         else:
-            stop(turndeg=request.form["turndeg"])
+            stop(turndeg=deg)
             return("stopping")
     else:
-        return("still alive")
+        return({"alive":'yes', "dir":dir, 'turndeg':deg})
     
 try :
     app.run(host='0.0.0.0')
