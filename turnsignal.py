@@ -22,6 +22,8 @@ def turnsignal(dir):
     if dir == "no":
         pixels.fill((0,0,0))
         pixels.show()
+        time.sleep(.5)
+        dir = []
     elif dir == "left":
         dir = [7,8]
     elif dir == "right":
