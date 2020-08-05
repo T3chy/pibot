@@ -17,6 +17,8 @@ servo_min = 150  # Min pulse length out of 4096
 servo_max = 600  # Max pulse length out of 4096
 pwm.set_pwm_freq(60)
 signal = ""
+dir = ""
+deg = ""
 pixels.fill((0,0,0))
 pixels.show()
 def turn(degrees,isstop=False):
@@ -89,6 +91,8 @@ app = flask.Flask(__name__)
 
 @app.route('/move', methods=['GET','PUT'])
 def move():
+    global dir
+    global deg
     if request.method == "PUT":
         dir = request.form["dir"]
         deg = request.form['turndeg']
@@ -102,9 +106,13 @@ def move():
             stop(turndeg=deg)
             return("stopping")
     else:
-        return({"alive":'yes', "dir":dir, 'turndeg':deg})
+        deg = int(deg) if deg != "" else 0
+        return "right" if deg > 0 else "left"
+        #return{"alive":'yes', "dir":dir, 'turndeg':deg}
     
-try :
+try:
+    dir = ""
+    deg = ""
     app.run(host='0.0.0.0')
 finally:
     pwm.set_all_pwm(1,0)
